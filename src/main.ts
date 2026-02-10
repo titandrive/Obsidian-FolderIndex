@@ -127,12 +127,19 @@ class FolderIndexSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
+		const descEl = containerEl.createEl("p", {
+			text: "Opens a note when you click on a folder. If a folder contains an index.md, it will always be opened first.",
+		});
+		descEl.style.paddingLeft = "var(--size-4-2)";
+
+		containerEl.createEl("h4", { text: "Settings" });
+
 		new Setting(containerEl)
 			.setName("Fallback behavior")
 			.setDesc("Which note to open when a folder has no index.md")
 			.addDropdown((dropdown) =>
 				dropdown
-					.addOption("recent", "Most recent")
+					.addOption("recent", "Recently edited")
 					.addOption("alphabetical", "Topmost")
 					.addOption("none", "Nothing")
 					.setValue(this.plugin.settings.fallback)
@@ -144,7 +151,7 @@ class FolderIndexSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Allow folder toggle")
-			.setDesc("Allow folders to expand/collapse when clicked")
+			.setDesc("Expand/collapse folders when clicking on the name. Clicking on arrow will always toggle folders.")
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.allowFolderToggle)
@@ -152,6 +159,28 @@ class FolderIndexSettingTab extends PluginSettingTab {
 						this.plugin.settings.allowFolderToggle = value;
 						await this.plugin.saveSettings();
 					})
+			);
+
+		containerEl.createEl("h4", { text: "About" });
+
+		new Setting(containerEl)
+			.setName("GitHub")
+			.setDesc("View source code, report issues, or contribute")
+			.addButton((button) =>
+				button.setButtonText("GitHub").onClick(() => {
+					window.open("https://github.com/titandrive/FolderIndex");
+				})
+			);
+
+		containerEl.createEl("h4", { text: "Support" });
+
+		new Setting(containerEl)
+			.setName("Buy me a coffee")
+			.setDesc("If you find this plugin useful, consider supporting its development!")
+			.addButton((button) =>
+				button.setButtonText("Ko-fi").onClick(() => {
+					window.open("https://ko-fi.com/titandrive");
+				})
 			);
 	}
 }
