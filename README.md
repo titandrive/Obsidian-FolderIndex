@@ -16,7 +16,7 @@ When you click a folder name, FolderIndex opens a note from that folder. If ther
 - **Allow folder toggle** — Whether clicking a folder name expands/collapses it. When disabled, only the arrow icon toggles folders.
 
 ## Installation
-FolderIndex can be installed either via the BRAT Plugin (recommended) or via a custom install. 
+FolderIndex can be installed either via the BRAT Plugin (recommended) or manually. 
 
 ### BRAT Installation
 Using BRAT is the recommended, and easiest, way to install custom Obsidian plugins that are not available in the Obsidian Community Store.
@@ -28,7 +28,7 @@ Using BRAT is the recommended, and easiest, way to install custom Obsidian plugi
 
 BRAT will now automatically keep track of updates for you
 
-### Custom Installation
+### Manual Installation
 1. Browse to FolderIndex [Releases](https://github.com/titandrive/folderindex/releases)
 2. Download the latest release
 3. Extract the release and copy it to your obsidian vault: `.../MyVault/.obsidian/plugins/FolderIndex`
