@@ -9,7 +9,7 @@ interface FolderIndexSettings {
 }
 
 const DEFAULT_SETTINGS: FolderIndexSettings = {
-	fallback: "alphabetical",
+	fallback: "recent",
 	allowFolderToggle: true,
 	strictMatching: false,
 };

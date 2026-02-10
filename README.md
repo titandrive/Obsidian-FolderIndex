@@ -40,11 +40,11 @@ FolderIndex is now installed and BRAT will automatically keep track of updates f
 FolderIndex is quite straightforward and works without any configuration. There are only a few settings:
 
 - **Fallback behavior** (What to open when a folder has no `index.md`)
-  - *Most recent:* The most recently edited note
+  - *Most recent:* The most recently edited note (default)
   - *Topmost:* The first note alphabetically
   - *Nothing:* Do nothing
-- **Strict Matching:** Whether it will open any note containing "index" in the title, or whether it will only open notes named exactly `index.md`. Defaulted to off.
-- **Allow folder toggle:** Whether clicking a folder name expands/collapses it. When disabled, you can still collapse a folder by clicking the arrow. 
+- **Strict Matching:** Whether it will open any note containing "index" in the title, or whether it will only open notes named exactly `index.md`. (Default: off)
+- **Allow folder toggle:** Whether clicking a folder name expands/collapses it. When disabled, you can still collapse a folder by clicking the arrow. (Default: on)
 
 ## AI Disclosure
 This plugin was made with the assistance of Claude Code. 
