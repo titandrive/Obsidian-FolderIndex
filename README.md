@@ -13,6 +13,9 @@ Additionally, you can set it so clicking on a folder opens your index note but k
 ### Example
 I keep a folder full of notes for every book I've read along with an index note that catelogs each of these books. I frequently like to look at my index note but dont like the visual clutter that a big folder of notes provides. FolderIndex allows me to quickly access my book index. This is especially helpful on the mobile app where space is limited. 
 
+### Tip
+If you generally prefer the default Obsidian behavior (where clicking on a folder expands it but does not open anything), you can set it to do nothing when there is not an index note. Set fallback to `nothing`. Therefore, it will behave as it always has unless you specify an index note. 
+
 ## Installation
 FolderIndex can be installed either via the BRAT Plugin (recommended) or manually. 
 
