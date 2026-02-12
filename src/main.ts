@@ -31,6 +31,38 @@ export default class QuickerFoldersPlugin extends Plugin {
 		this.addSettingTab(new QuickerFoldersSettingTab(this.app, this));
 		this.registerFolderClickHandler();
 		this.patchFileExplorer();
+
+		this.addCommand({
+			id: "set-as-index",
+			name: "Set current note as index",
+			checkCallback: (checking: boolean) => {
+				const file = this.app.workspace.getActiveFile();
+				if (!file) return false;
+				if (checking) return true;
+				this.app.fileManager.processFrontMatter(file, (fm) => {
+					fm.index_note = true;
+				});
+				new Notice(`Set "${file.basename}" as folder index`);
+				return true;
+			},
+		});
+
+		this.addCommand({
+			id: "remove-as-index",
+			name: "Remove current note as index",
+			checkCallback: (checking: boolean) => {
+				const file = this.app.workspace.getActiveFile();
+				if (!file) return false;
+				const cache = this.app.metadataCache.getFileCache(file);
+				if (!cache?.frontmatter?.index_note) return false;
+				if (checking) return true;
+				this.app.fileManager.processFrontMatter(file, (fm) => {
+					delete fm.index_note;
+				});
+				new Notice(`Removed "${file.basename}" as folder index`);
+				return true;
+			},
+		});
 	}
 
 	onunload() {
@@ -193,6 +225,14 @@ export default class QuickerFoldersPlugin extends Plugin {
 	}
 
 	private getIndexNote(folder: TFolder): TFile | null {
+		// Frontmatter index: true takes priority over everything
+		const files = this.getMarkdownFiles(folder);
+		const frontmatterIndex = files.find((f) => {
+			const cache = this.app.metadataCache.getFileCache(f);
+			return cache?.frontmatter?.index_note === true;
+		});
+		if (frontmatterIndex) return frontmatterIndex;
+
 		const keyword = this.settings.keyword.toLowerCase();
 
 		if (this.settings.strictMatching) {
@@ -201,7 +241,6 @@ export default class QuickerFoldersPlugin extends Plugin {
 			return file instanceof TFile ? file : null;
 		}
 
-		const files = this.getMarkdownFiles(folder);
 		const exact = files.find((f) => f.basename.toLowerCase() === keyword);
 		if (exact) return exact;
 		const partial = files.find((f) =>
